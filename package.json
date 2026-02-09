@@ -4,11 +4,19 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"format": "biome format --write ."
+		"format": "biome format --write .",
+		"dev": "turbo run dev --filter=front-end --filter=back-end",
+		"install": "turbo run install",
+		"dev:front": "turbo run dev --filter=front-end",
+		"dev:back": "turbo run dev --filter=back-end"
 	},
 	"keywords": [],
 	"author": "x29",
 	"license": "ISC",
+	"packageManager": "pnpm@10.14.0",
+	"workspaces": [
+		"apps/*"
+	],
 	"devDependencies": {
 		"@biomejs/biome": "2.3.14"
 	},
