@@ -1,7 +1,8 @@
 {
-  "miniprogramRoot": "dist/",
+  "miniprogramRoot": "./",
   "projectname": "front-end",
   "description": "front-end of bell",
+  "appid": "wx29a68103820f9bec",
   "setting": {
     "urlCheck": true,
     "es6": false,
@@ -26,6 +27,5 @@
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
-  },
-  "appid": "wx29a68103820f9bec"
+  }
 }

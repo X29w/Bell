@@ -11,5 +11,8 @@
 	"license": "ISC",
 	"devDependencies": {
 		"@biomejs/biome": "2.3.14"
+	},
+	"dependencies": {
+		"turbo": "^2.8.3"
 	}
 }
