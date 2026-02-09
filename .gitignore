@@ -6,6 +6,7 @@
 .DS_Store
 .swc
 *.local
+node_modules
 
 # compiled output
 */build
