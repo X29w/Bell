@@ -1,4 +1,13 @@
-@use 'tailwindcss/base' as *;
-@use 'tailwindcss/components' as *;
-@use 'tailwindcss/utilities' as *;
+@use "tailwindcss/base" as *;
+@use "tailwindcss/components" as *;
+@use "tailwindcss/utilities" as *;
 @import "taro-ui/dist/style/index.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+page {
+  height: 100vh;
+  background-color: #f6f7f8;
+}
