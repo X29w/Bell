@@ -1,4 +1,4 @@
-import { View, Text } from "@tarojs/components";
+import { View, Text, Input } from "@tarojs/components";
 import { useLoad } from "@tarojs/taro";
 import type { FC } from "react";
 import { AtButton, AtIcon } from "taro-ui";
@@ -37,6 +37,21 @@ const Home: FC = () => {
             <Text className="text-[#0F172A] text-2xl font-bold">3</Text>
             <Text className="text-[#94A3B8] text-xs font-semibold">3</Text>
           </View>
+        </View>
+
+        <View className="w-full h-12 my-8 flex items-center">
+          <Input
+            className="flex-1 h-full gap-3 bg-white rounded-2xl"
+            placeholder="Search inventory..."
+          />
+          <View className="w-12 h-full bg-white rounded-2xl"></View>
+        </View>
+
+        <View className="flex justify-between items-center">
+          <Text className="text-[#0F172A] font-bold text-lg">
+            Expiring Soon
+          </Text>
+          <Text className="text-[#137FEC] font-semibold text-sm">View All</Text>
         </View>
       </View>
 
