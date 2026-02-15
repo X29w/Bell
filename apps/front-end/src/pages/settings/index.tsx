@@ -27,7 +27,7 @@ const Settings: FC = () => {
             <Text className="text-xs font-medium text-blue-1">Manage</Text>
           </View>
 
-          <View className="w-full h-20 mt-3 px-4 flex flex-col justify-center border border-solid border-[#E2E8F0] rounded-lg">
+          <View className="w-full h-20 mt-3 px-4 flex flex-col justify-center border border-solid border-[#E2E8F0] rounded-lg bg-white">
             <View className="flex justify-between items-center">
               <View className="w-full flex items-center gap-3">
                 <View className="w-10 h-10 bg-gray-1"></View>
@@ -49,7 +49,7 @@ const Settings: FC = () => {
           <Text className="text-xs text-gray-1 font-semibold">
             App Settings
           </Text>
-          <View className="w-full h-16 mt-3 px-4 flex flex-col justify-center border border-solid border-[#E2E8F0] rounded-lg">
+          <View className="w-full h-16 mt-3 px-4 flex flex-col justify-center border border-solid border-[#E2E8F0] rounded-lg bg-white">
             <View className="flex justify-between">
               <View className="flex items-center gap-3">
                 <View className="w-8 h-8 bg-gray-1"></View>
@@ -62,7 +62,7 @@ const Settings: FC = () => {
           </View>
         </View>
 
-        <View className="w-full h-14 px-4 flex flex-col justify-center border border-solid border-[#E2E8F0] rounded-lg">
+        <View className="w-full h-14 px-4 flex flex-col justify-center border border-solid border-[#E2E8F0] rounded-lg bg-white">
           <View className="flex items-center gap-3">
             <View className="w-2 h-2 bg-gray-1"></View>
             <Text className="text-[#EF4444] text-base font-medium">

@@ -23,11 +23,18 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/settings/index",
-          "pathName": "pages/home/index",
+          "name": "pages/list/index",
+          "pathName": "pages/list/index",
           "query": "",
           "scene": null,
           "launchMode": "default"
+        },
+        {
+          "name": "pages/settings/index",
+          "pathName": "pages/list/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

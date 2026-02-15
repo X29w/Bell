@@ -47,7 +47,7 @@ const Home: FC = () => {
           <View className="w-12 h-full bg-white rounded-2xl"></View>
         </View>
 
-        <View className="flex justify-between items-center">
+        <View className="mb-4 flex justify-between items-center">
           <Text className="text-black-1 font-bold text-lg">Expiring Soon</Text>
           <Text className="text-blue-1 font-semibold text-sm">View All</Text>
         </View>
