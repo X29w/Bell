@@ -1,4 +1,5 @@
-import { Input, Picker, Text, View } from "@tarojs/components";
+import { Camera, Input, Picker, Text, View } from "@tarojs/components";
+import Taro from "@tarojs/taro";
 import type { FC } from "react";
 import { AtList, AtListItem } from "taro-ui";
 
@@ -14,7 +15,24 @@ const Scanner: FC = () => {
       </View>
 
       <View className="p-4 bg-white">
-        <View className="aspect-[358/243] bg-gray-200"></View>
+        <View
+          className="aspect-[358/243] bg-gray-200"
+          onClick={async () =>
+            await Taro.scanCode({
+              onlyFromCamera: true, // 只使用相机扫码
+              scanType: ["barCode"],
+              success:(res)=>{
+                console.log("Scan successful", window.atob(res.rawData.replace(/^data:image\/\w+;base64,/, '')))
+              },
+              fail:(err)=>{
+                console.log("Scan failed", err)
+              },
+              complete:(res)=>{
+                console.log("Scan complete", res)
+              }
+            })
+          }
+        ></View>
       </View>
 
       <View className="px-4">

@@ -19,17 +19,5 @@
     "bigPackageSizeSupport": false
   },
   "libVersion": "3.14.2",
-  "condition": {
-    "miniprogram": {
-      "list": [
-        {
-          "name": "pages/inner/spaces-detail/index",
-          "pathName": "pages/inner/spaces-detail/index",
-          "query": "",
-          "scene": null,
-          "launchMode": "default"
-        }
-      ]
-    }
-  }
+  "condition": {}
 }

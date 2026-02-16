@@ -19,7 +19,7 @@ const Spaces: FC = () => {
           <RenderList
             items={[...Array(3)]}
             renderItems={() => (
-              <Link to="/pages/inner/spaces-detail/index">
+              <Link to="/pages/inner/space-detail/index">
                 <View className="h-24 p-4 flex justify-between items-center bg-white">
                   <View className="flex justify-between items-center gap-4">
                     <View className="w-14 h-14 bg-blue-1/10 rounded-lg"></View>

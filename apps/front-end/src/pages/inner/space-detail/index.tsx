@@ -63,11 +63,17 @@ const SpaceDetail: FC = () => {
             Switch to this space
           </Text>
         </View>
-        <View className="flex justify-center items-center gap-2">
-          <View className="w-2 h-2 bg-gray-200"></View>
-          <Text className="text-sm text-red-500 font-semibold">
-            Delete Space
-          </Text>
+        <View className="flex justify-center items-center gap-6">
+          <View className="flex justify-center">
+            <Text className="text-sm text-blue-1 font-semibold">
+              Invite New Member
+            </Text>
+          </View>
+          <View className="flex justify-center items-center gap-2">
+            <Text className="text-sm text-red-500 font-semibold">
+              Delete Space
+            </Text>
+          </View>
         </View>
       </View>
     </View>
