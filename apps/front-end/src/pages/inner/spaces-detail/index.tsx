@@ -57,7 +57,7 @@ const SpaceDetail: FC = () => {
         </View>
       </View>
 
-      <View className="fixed w-full bottom-0 left-0 h-40 flex flex-col justify-center gap-4">
+      <View className="fixed w-full bottom-0 left-0 h-40 px-6 flex flex-col justify-center gap-4">
         <View className="h-14 flex justify-center items-center bg-blue-1 rounded-xl">
           <Text className="text-sm text-white font-semibold">
             Switch to this space
