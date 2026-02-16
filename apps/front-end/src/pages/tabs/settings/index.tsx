@@ -1,3 +1,4 @@
+import Link from "@/components/config/link";
 import { Switch, Text, View } from "@tarojs/components";
 import type { FC } from "react";
 
@@ -24,7 +25,9 @@ const Settings: FC = () => {
         <View>
           <View className="flex justify-between">
             <Text className="text-xs font-semibold text-gray-1">My Spaces</Text>
-            <Text className="text-xs font-medium text-blue-1">Manage</Text>
+            <Link to="/pages/inner/spaces/index">
+              <Text className="text-xs font-medium text-blue-1">Manage</Text>
+            </Link>
           </View>
 
           <View className="w-full h-20 mt-3 px-4 flex flex-col justify-center border border-solid border-[#E2E8F0] rounded-lg bg-white">
