@@ -23,8 +23,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/inner/spaces/index",
-          "pathName": "pages/inner/spaces/index",
+          "name": "pages/inner/spaces-detail/index",
+          "pathName": "pages/inner/spaces-detail/index",
           "query": "",
           "scene": null,
           "launchMode": "default"

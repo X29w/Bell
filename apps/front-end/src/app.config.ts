@@ -4,6 +4,7 @@ export default defineAppConfig({
     "pages/tabs/list/index",
     "pages/tabs/settings/index",
     "pages/inner/spaces/index",
+    "pages/inner/spaces-detail/index",
     "pages/inner/scanner/index",
     "pages/inner/commodity/index",
   ],
