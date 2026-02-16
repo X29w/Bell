@@ -5,6 +5,7 @@ export default defineAppConfig({
     "pages/tabs/settings/index",
     "pages/inner/spaces/index",
     "pages/inner/scanner/index",
+    "pages/inner/commodity/index",
   ],
   tabBar: {
     // custom: true,

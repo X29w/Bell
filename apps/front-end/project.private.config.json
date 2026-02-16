@@ -19,5 +19,17 @@
     "bigPackageSizeSupport": false
   },
   "libVersion": "3.14.2",
-  "condition": {}
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/inner/commodity/index",
+          "pathName": "pages/inner/commodity/index",
+          "query": "",
+          "scene": null,
+          "launchMode": "default"
+        }
+      ]
+    }
+  }
 }

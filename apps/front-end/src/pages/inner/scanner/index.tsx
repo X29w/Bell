@@ -20,28 +20,39 @@ const Scanner: FC = () => {
       <View className="px-4">
         <View>
           <Text className="text-xs text-gray-1 font-semibold">Item Name</Text>
-          <Input />
+          <View className="bg-white rounded-lg">
+            <Input className="h-14 px-4" />
+          </View>
         </View>
 
-        <View>
-          <Text className="text-xs text-gray-1 font-semibold">Category</Text>
-          <Picker
-            mode="selector"
-            range={["美国", "中国", "巴西", "日本"]}
-            onChange={() => {}}
-          >
-            <AtList>
-              <AtListItem title="国家地区" />
-            </AtList>
-          </Picker>
+        <View className="flex items-center gap-4">
+          <View className="flex-1">
+            <Text className="text-xs text-gray-1 font-semibold">Category</Text>
+            <Picker
+              mode="selector"
+              range={["美国", "中国", "巴西", "日本"]}
+              onChange={() => {}}
+            >
+              <AtList>
+                <AtListItem title="国家地区" />
+              </AtList>
+            </Picker>
+          </View>
+          <View className="flex-1">
+            <Text className="text-xs text-gray-1 font-semibold">Exp. Date</Text>
+            <Picker mode="date" value="" onChange={() => {}}>
+              <AtList>
+                <AtListItem title="请选择日期" />
+              </AtList>
+            </Picker>
+          </View>
         </View>
-        <View>
-          <Text className="text-xs text-gray-1 font-semibold">Exp. Date</Text>
-          <Picker mode="date" value="" onChange={() => {}}>
-            <AtList>
-              <AtListItem title="请选择日期" />
-            </AtList>
-          </Picker>
+
+        <View className="w-full h-14 mt-5 grid place-items-center bg-blue-1 rounded-2xl">
+          <View className="flex gap-2 items-center">
+            <View className="w-2 h-2 bg-gray-200"></View>
+            <Text className="text-base text-white font-bold">Save Item</Text>
+          </View>
         </View>
       </View>
     </View>

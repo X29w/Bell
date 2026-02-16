@@ -1,3 +1,4 @@
+import Link from "@/components/config/link";
 import RenderList from "@/components/config/render-list";
 import { View, Text, Input, ScrollView } from "@tarojs/components";
 import Taro from "@tarojs/taro";
@@ -60,39 +61,36 @@ const Home: FC = () => {
           <RenderList
             items={[...Array(6)]}
             renderItems={() => (
-              <View className="w-full h-28 flex justify-between items-center p-3 bg-white rounded-2xl">
-                <View className="h-full flex items-center gap-4">
-                  <View className="w-20 h-20 bg-gray-300 rounded-lg"></View>
-                  <View className="flex flex-col justify-between">
-                    <Text className="text-[#1E293B] text-base font-semibold">
-                      Organic Whole Milk
-                    </Text>
-                    <Text className="text-[#94A3B8] text-base">
-                      Refrigerator
-                    </Text>
-                    <View className="w-fit px-2 py-1 flex items-center gap-1 bg-[#FEF2F2] rounded-2xl">
-                      <View className="w-4 h-4 bg-gray-300 "></View>
-                      <Text className="text-[#DC2626] text-xs font-bold">
-                        TODAY
+              <Link to="/pages/inner/commodity/index">
+                <View className="w-full h-28 flex justify-between items-center p-3 bg-white rounded-2xl">
+                  <View className="h-full flex items-center gap-4">
+                    <View className="w-20 h-20 bg-gray-300 rounded-lg"></View>
+                    <View className="flex flex-col justify-between">
+                      <Text className="text-[#1E293B] text-base font-semibold">
+                        Organic Whole Milk
                       </Text>
+                      <Text className="text-[#94A3B8] text-base">
+                        Refrigerator
+                      </Text>
+                      <View className="w-fit px-2 py-1 flex items-center gap-1 bg-[#FEF2F2] rounded-2xl">
+                        <View className="w-4 h-4 bg-gray-300 "></View>
+                        <Text className="text-[#DC2626] text-xs font-bold">
+                          TODAY
+                        </Text>
+                      </View>
                     </View>
                   </View>
+                  <View className="w-2 h-2 bg-gray-300"></View>
                 </View>
-                <View className="w-2 h-2 bg-gray-300"></View>
-              </View>
+              </Link>
             )}
           />
         </ScrollView>
       </View>
 
-      <View
-        className="fixed bottom-2 left-1/2 -translate-x-1/2 w-12 h-12 bg-blue-1 rounded-full"
-        onClick={() =>
-          Taro.navigateTo({
-            url: "/pages/page/path/name",
-          })
-        }
-      ></View>
+      <Link to="/pages/inner/scanner/index">
+        <View className="fixed bottom-2 left-1/2 -translate-x-1/2 w-12 h-12 bg-blue-1 rounded-full"></View>
+      </Link>
     </View>
   );
 };
