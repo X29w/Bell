@@ -1,5 +1,6 @@
 import RenderList from "@/components/config/render-list";
 import { View, Text, Input, ScrollView } from "@tarojs/components";
+import Taro from "@tarojs/taro";
 import { useLoad } from "@tarojs/taro";
 import type { FC } from "react";
 
@@ -84,7 +85,14 @@ const Home: FC = () => {
         </ScrollView>
       </View>
 
-      <View className="fixed bottom-2 left-1/2 -translate-x-1/2 w-12 h-12 bg-blue-1 rounded-full"></View>
+      <View
+        className="fixed bottom-2 left-1/2 -translate-x-1/2 w-12 h-12 bg-blue-1 rounded-full"
+        onClick={() =>
+          Taro.navigateTo({
+            url: "/pages/page/path/name",
+          })
+        }
+      ></View>
     </View>
   );
 };

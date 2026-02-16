@@ -1,9 +1,10 @@
 export default defineAppConfig({
   pages: [
-    "pages/home/index",
-    "pages/list/index",
-    "pages/spaces/index",
-    "pages/settings/index",
+    "pages/tabs/home/index",
+    "pages/tabs/list/index",
+    "pages/tabs/settings/index",
+    "pages/inner/spaces/index",
+    "pages/inner/scanner/index",
   ],
   tabBar: {
     // custom: true,
@@ -12,25 +13,19 @@ export default defineAppConfig({
     backgroundColor: "#FFF",
     list: [
       {
-        pagePath: "pages/home/index",
+        pagePath: "pages/tabs/home/index",
         text: "HOME",
         iconPath: "assets/images/tabs/home-un-active.png",
         selectedIconPath: "assets/images/tabs/home-active.png",
       },
       {
-        pagePath: "pages/list/index",
+        pagePath: "pages/tabs/list/index",
         text: "LIST",
         iconPath: "assets/images/tabs/list-un-active.png",
         selectedIconPath: "assets/images/tabs/list-active.png",
       },
       {
-        pagePath: "pages/spaces/index",
-        text: "SPACES",
-        iconPath: "assets/images/tabs/space-un-active.png",
-        selectedIconPath: "assets/images/tabs/space-active.png",
-      },
-      {
-        pagePath: "pages/settings/index",
+        pagePath: "pages/tabs/settings/index",
         text: "SETTINGS",
         iconPath: "assets/images/tabs/setting-un-active.png",
         selectedIconPath: "assets/images/tabs/setting-active.png",

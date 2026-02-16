@@ -19,24 +19,5 @@
     "bigPackageSizeSupport": false
   },
   "libVersion": "3.14.2",
-  "condition": {
-    "miniprogram": {
-      "list": [
-        {
-          "name": "pages/list/index",
-          "pathName": "pages/list/index",
-          "query": "",
-          "scene": null,
-          "launchMode": "default"
-        },
-        {
-          "name": "pages/settings/index",
-          "pathName": "pages/list/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        }
-      ]
-    }
-  }
+  "condition": {}
 }
