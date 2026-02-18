@@ -1,9 +1,32 @@
-import { Camera, Input, Picker, Text, View } from "@tarojs/components";
+import { Camera, Image, Input, Picker, Text, View } from "@tarojs/components";
 import Taro from "@tarojs/taro";
-import type { FC } from "react";
+import { useState, type FC } from "react";
 import { AtList, AtListItem } from "taro-ui";
 
 const Scanner: FC = () => {
+  const [selectedImage, setSelectedImage] = useState<string>("");
+
+  const handleChooseImage = async () => {
+    try {
+      const res = await Taro.chooseImage({
+        count: 1,
+        sizeType: ["original", "compressed"],
+        sourceType: ["album", "camera"],
+      });
+
+      if (res.tempFilePaths && res.tempFilePaths.length > 0) {
+        setSelectedImage(res.tempFilePaths[0]);
+        console.log("选中的图片路径:", res.tempFilePaths[0]);
+      }
+    } catch (error) {
+      console.error("选择图片失败:", error);
+      Taro.showToast({
+        title: "选择图片失败",
+        icon: "none",
+      });
+    }
+  };
+
   return (
     <View>
       <View className="h-16 flex flex-col justify-center">
@@ -17,22 +40,23 @@ const Scanner: FC = () => {
       <View className="p-4 bg-white">
         <View
           className="aspect-[358/243] bg-gray-200"
-          onClick={async () =>
-            await Taro.scanCode({
-              onlyFromCamera: true, // 只使用相机扫码
-              scanType: ["barCode"],
-              success:(res)=>{
-                console.log("Scan successful", window.atob(res.rawData.replace(/^data:image\/\w+;base64,/, '')))
-              },
-              fail:(err)=>{
-                console.log("Scan failed", err)
-              },
-              complete:(res)=>{
-                console.log("Scan complete", res)
-              }
-            })
-          }
-        ></View>
+          onClick={async () => await handleChooseImage()}
+        >
+          {selectedImage ? (
+            <Image
+              src={selectedImage}
+              className="w-full h-full object-cover"
+              mode="aspectFill"
+            />
+          ) : (
+            <View className="w-full h-full flex flex-col items-center justify-center">
+              <View className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mb-2">
+                <Text className="text-gray-500 text-2xl">+</Text>
+              </View>
+              <Text className="text-gray-500 text-sm">点击选择图片</Text>
+            </View>
+          )}
+        </View>
       </View>
 
       <View className="px-4">

@@ -4,6 +4,7 @@ import { View, Text, Input, ScrollView } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { useLoad } from "@tarojs/taro";
 import type { FC } from "react";
+import { AtIcon } from "taro-ui";
 
 const Home: FC = () => {
   useLoad(() => {
@@ -25,7 +26,9 @@ const Home: FC = () => {
       <View className="flex-1 py-4 px-6">
         <View className="w-full h-32 grid grid-cols-3 gap-3">
           <View className="w-full h-full p-4 flex flex-col justify-between bg-white rounded-2xl">
-            <View className="w-8 h-8 bg-[#FEF2F2]"></View>
+            <View className="w-8 h-8 bg-[#FEF2F2]">
+              <AtIcon prefixClass="icon" value="shouye" />
+            </View>
             <Text className="text-black-1 text-2xl font-bold">3</Text>
             <Text className="text-[#94A3B8] text-xs font-semibold">3</Text>
           </View>

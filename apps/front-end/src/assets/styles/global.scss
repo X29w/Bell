@@ -2,6 +2,7 @@
 @use "tailwindcss/components" as *;
 @use "tailwindcss/utilities" as *;
 @import "taro-ui/dist/style/index.scss";
+@import "../icon-font/iconfont.scss";
 
 * {
   box-sizing: border-box;
