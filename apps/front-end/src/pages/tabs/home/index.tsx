@@ -26,7 +26,12 @@ const Home: FC = () => {
         <View className="w-full h-32 grid grid-cols-3 gap-3">
           <View className="w-full h-full p-4 flex flex-col justify-between bg-white rounded-2xl">
             <View className="w-8 h-8 bg-[#FEF2F2]">
-              <AtIcon prefixClass="icon" value="shouye" />
+              <AtIcon
+                prefixClass="icon"
+                value="shouye"
+                size={30}
+                color="#DC2626"
+              />
             </View>
             <Text className="text-black-1 text-2xl font-bold">3</Text>
             <Text className="text-[#94A3B8] text-xs font-semibold">3</Text>
