@@ -1,5 +1,6 @@
 import Link from "@/components/config/link";
 import { Switch, Text, View } from "@tarojs/components";
+import Taro from "@tarojs/taro";
 import type { FC } from "react";
 
 const Settings: FC = () => {
@@ -12,7 +13,22 @@ const Settings: FC = () => {
         </View>
       </View>
 
-      <View className="w-full flex justify-center">
+      <View
+        className="w-full flex justify-center"
+        onClick={async () => {
+          await Taro.login({
+            complete: (res) => {
+              console.log(res);
+            },
+            success: (res) => {
+              console.log(res);
+            },
+            fail: (res) => {
+              console.log(res);
+            },
+          });
+        }}
+      >
         <View className="mt-4 flex flex-col gap-4">
           <View className="w-24 h-24 mx-auto bg-gray-200 rounded-full"></View>
           <Text className="text-black-1 text-xl font-semibold">
