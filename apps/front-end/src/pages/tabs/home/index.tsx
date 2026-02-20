@@ -1,7 +1,6 @@
 import Link from "@/components/config/link";
 import RenderList from "@/components/config/render-list";
 import { View, Text, Input, ScrollView } from "@tarojs/components";
-import Taro from "@tarojs/taro";
 import { useLoad } from "@tarojs/taro";
 import type { FC } from "react";
 import { AtIcon } from "taro-ui";
