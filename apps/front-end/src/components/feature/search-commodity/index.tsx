@@ -28,7 +28,7 @@ const SearchCommodity: FC<SearchCommodityProps> = ({
   },
 }) => {
   return (
-    <View className={`w-full h-12 my-8 flex items-center gap-3 ${className}`}>
+    <View className={`w-full h-12 flex items-center gap-3 ${className}`}>
       <View className="flex-1 flex items-center">
         <View className="w-12 h-12 grid place-items-center bg-white rounded-tl-2xl rounded-bl-2xl">
           <AtIcon

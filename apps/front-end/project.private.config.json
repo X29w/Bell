@@ -24,7 +24,7 @@
       "list": [
         {
           "name": "pages/tabs/list/index",
-          "pathName": "pages/tabs/list/index",
+          "pathName": "pages/inner/commodity/index",
           "query": "",
           "scene": null,
           "launchMode": "default"

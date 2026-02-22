@@ -21,7 +21,7 @@ const Home: FC = () => {
       <View className="flex-1 py-4 px-6">
         <Statistic />
 
-        <SearchCommodity />
+        <SearchCommodity className="my-8" />
 
         <View className="mb-4 flex justify-between items-center">
           <Text className="text-black-1 font-bold text-lg">Expiring Soon</Text>

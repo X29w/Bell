@@ -1,11 +1,14 @@
 import { Text, View } from "@tarojs/components";
 import type { FC } from "react";
+import { AtIcon } from "taro-ui";
 
 const SpaceCreated: FC = () => {
   return (
     <View>
       <View className="w-20 h-20 mx-auto mt-8 grid place-items-center bg-blue-1/10 rounded-full">
-        <View className="w-12 h-12 bg-blue-1 rounded-full"></View>
+        <View className="w-12 h-12 grid place-items-center bg-blue-1 rounded-full">
+          <AtIcon value="check" size="20" color="#ffffff" />
+        </View>
       </View>
 
       <View className="w-full mt-6 mb-2 flex justify-center">
@@ -44,10 +47,22 @@ const SpaceCreated: FC = () => {
       <View className="w-full flex justify-center">
         <View className="flex items-center gap-3">
           <View className="w-40 h-14 bg-blue-1 rounded-xl flex justify-center items-center gap-2">
-            <View className="w-2 h-2 bg-gray-200"></View>
+            <AtIcon
+              prefixClass="icon"
+              value="fuzhi"
+              size="20"
+              color="#ffffff"
+            />
             <Text className="text-base font-medium text-white">Copy Code</Text>
           </View>
-          <View className="w-14 h-14 border border-solid border-[#E2E8F0] rounded-xl"></View>
+          <View className="w-14 h-14 grid place-items-center border border-solid border-[#E2E8F0] rounded-xl">
+            <AtIcon
+              prefixClass="icon"
+              value="fenxiang"
+              size="24"
+              color="#137FEC"
+            />
+          </View>
         </View>
       </View>
 

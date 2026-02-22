@@ -2,6 +2,7 @@ import Link from "@/components/config/link";
 import RenderList from "@/components/config/render-list";
 import { Text, View } from "@tarojs/components";
 import type { FC } from "react";
+import { AtIcon } from "taro-ui";
 
 const Spaces: FC = () => {
   return (
@@ -33,9 +34,7 @@ const Spaces: FC = () => {
                       </View>
                     </View>
                   </View>
-                  <View>
-                    <View className="w-2 h-2 bg-gray-200"></View>
-                  </View>
+                  <AtIcon value="chevron-right" size="20" color="#CBD5E1" />
                 </View>
               </Link>
             )}
@@ -43,7 +42,14 @@ const Spaces: FC = () => {
         </View>
 
         <View className="w-full h-40 mt-8 mb-14 p-6 flex gap-4 bg-blue-1/5 rounded-xl border border-dashed border-blue-1/20">
-          <View className="w-2 h-2 bg-gray-200"></View>
+          <View className="w-8 h-8 grid place-items-center bg-blue-1/10 rounded-full">
+            <AtIcon
+              prefixClass="icon"
+              value="xiangfa"
+              size="18"
+              color="#137FEC"
+            />
+          </View>
           <View className="flex-1 flex flex-col gap-1">
             <Text className="text-base text-blue-1 font-semibold">Pro Tip</Text>
             <Text className="text-sm text-[#475569]">
@@ -55,7 +61,12 @@ const Spaces: FC = () => {
 
         <View className="w-full h-14 grid place-items-center rounded-xl bg-blue-1">
           <View className="flex items-center gap-2">
-            <View className="w-2 h-2 bg-gray-200"></View>
+              <AtIcon
+              prefixClass="icon"
+              value="jia"
+              size="18"
+              color="#ffffff"
+            />
             <Text className="text-base text-white font-bold">
               Create New Space
             </Text>

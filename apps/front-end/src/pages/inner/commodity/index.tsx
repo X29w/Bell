@@ -1,5 +1,6 @@
 import { Progress, Text, View } from "@tarojs/components";
 import type { FC } from "react";
+import { AtIcon } from "taro-ui";
 
 const Commodity: FC = () => {
   return (
@@ -38,9 +39,9 @@ const Commodity: FC = () => {
           </Text>
 
           <View className="w-full h-21 p-4 mt-4 flex justify-between items-center bg-[#F8FAFC] rounded-xl border border-solid border-[#E2E8F0]">
-            <View className="flex items-center gap-3">
+            <View className="flex items-center gap-2">
               <View className="w-10 h-10 bg-gray-200 rounded-xl"></View>
-              <View className="flex flex-col">
+              <View className="flex-1 flex flex-col">
                 <Text className="text-sm font-medium text-black-1">
                   Smart Reminder
                 </Text>
@@ -65,7 +66,13 @@ const Commodity: FC = () => {
             <View className="flex items-center gap-3">
               <View className="h-14 flex-1 grid place-items-center bg-blue-1 rounded-lg">
                 <View className="flex items-center gap-2">
-                  <View className="w-2 h-2 bg-gray-200"></View>
+                  <AtIcon
+                    prefixClass="icon"
+                    value="dui"
+                    size="20"
+                    color="#ffffff"
+                  />
+
                   <Text className="text-base text-white font-bold">
                     Mark as Used
                   </Text>

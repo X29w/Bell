@@ -1,22 +1,13 @@
 import RenderList from "@/components/config/render-list";
-import { Input, Text, View } from "@tarojs/components";
+import SearchCommodity from "@/components/feature/search-commodity";
+import { Text, View } from "@tarojs/components";
 import type { FC } from "react";
 import { AtSwipeAction } from "taro-ui";
 
 const List: FC = () => {
   return (
     <View className="px-4">
-      <View className="w-full h-16 flex flex-col justify-center">
-        <Text className="text-2xl text-black-1 font-bold">Inventory</Text>
-      </View>
-
-      <View className="w-full h-12 mb-8 flex items-center gap-3">
-        <Input
-          className="flex-1 h-full px-3 bg-white rounded-2xl"
-          placeholder="Search inventory..."
-        />
-        <View className="w-12 h-full bg-white rounded-2xl"></View>
-      </View>
+      <SearchCommodity className="my-8" />
 
       <View className="mb-4 flex gap-2 items-center">
         <RenderList

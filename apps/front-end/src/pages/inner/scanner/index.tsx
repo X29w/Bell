@@ -1,7 +1,7 @@
 import { Camera, Image, Input, Picker, Text, View } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { useState, type FC } from "react";
-import { AtList, AtListItem } from "taro-ui";
+import { AtIcon, AtList, AtListItem } from "taro-ui";
 
 const Scanner: FC = () => {
   const [selectedImage, setSelectedImage] = useState<string>("");
@@ -92,7 +92,7 @@ const Scanner: FC = () => {
 
         <View className="w-full h-14 mt-5 grid place-items-center bg-blue-1 rounded-2xl">
           <View className="flex gap-2 items-center">
-            <View className="w-2 h-2 bg-gray-200"></View>
+            <AtIcon prefixClass="icon" value="dui" size="20" color="#ffffff" />
             <Text className="text-base text-white font-bold">Save Item</Text>
           </View>
         </View>

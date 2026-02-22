@@ -1,10 +1,11 @@
 import RenderList from "@/components/config/render-list";
 import { Text, View } from "@tarojs/components";
 import type { FC } from "react";
+import { AtIcon } from "taro-ui";
 
 const SpaceDetail: FC = () => {
   return (
-    <View className="relative pb-40">
+    <View className="relative pb-40 pt-8">
       <View className="px-6">
         <View>
           <Text className="text-xs text-gray-1 font-semibold">Invite Code</Text>
@@ -15,7 +16,14 @@ const SpaceDetail: FC = () => {
                 Share this code to invite others
               </Text>
             </View>
-            <View className="w-10 h-10 rounded-xl bg-blue-1/10"></View>
+            <View className="w-10 h-10 grid place-items-center rounded-xl bg-blue-1/10">
+              <AtIcon
+                prefixClass="icon"
+                value="fuzhi"
+                size="20"
+                color="#137FEC"
+              />
+            </View>
           </View>
         </View>
 
