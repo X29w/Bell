@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ====================
+// 用户相关模型
+// ====================
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 关系字段
+  posts     Post[]
+  spaces    Space[]
+  spaceMembers SpaceMember[]
+}
+
+model Post {
+  id        String   @id @default(uuid())
+  title     String
+  content   String?
+  published Boolean  @default(false)
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ====================
+// 空间相关模型
+// ====================
+
+model Space {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  ownerId     String
+  owner       User     @relation(fields: [ownerId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // 关系字段
+  members     SpaceMember[]
+  commodities Commodity[]
+}
+
+model SpaceMember {
+  id        String   @id @default(uuid())
+  spaceId   String
+  userId    String
+  role      String   @default("member") // member, admin
+  space     Space    @relation(fields: [spaceId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([spaceId, userId])
+}
+
+// ====================
+// 商品相关模型
+// ====================
+
+model Commodity {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  price       Float?
+  spaceId     String
+  space       Space    @relation(fields: [spaceId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
