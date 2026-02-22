@@ -60,12 +60,12 @@ importers:
       compression:
         specifier: ^1.8.1
         version: 1.8.1
-      cors:
-        specifier: ^2.8.6
-        version: 2.8.6
       helmet:
         specifier: ^8.1.0
         version: 8.1.0
+      nest-knife4j:
+        specifier: ^1.0.1
+        version: 1.0.1(@types/express@5.0.6)(express@5.2.1)
       passport:
         specifier: ^0.7.0
         version: 0.7.0
@@ -7798,6 +7798,12 @@ packages:
   nervjs@1.5.7:
     resolution: {integrity: sha512-x+hGSOETqA+7lbChW+c/NIXEMrCCvm6IaEHlDbZmaNVX0TAyKZinRIHcYr7o5K/pA4qGWjJQmjoNyx+Mx+rVLg==}
 
+  nest-knife4j@1.0.1:
+    resolution: {integrity: sha512-TD1LmxzclBddOygIDIRjr3jIwj+C3dp69G4Sy+QwAiiuQQQAxwaGXioCB3ibr/SLQ9nuR8klYehzS3HjS32Nfw==}
+    peerDependencies:
+      '@types/express': ^4.17.11
+      express: ^4.17.1
+
   nested-error-stacks@2.0.1:
     resolution: {integrity: sha512-SrQrok4CATudVzBS7coSz26QRSmlK9TzzoFbeKfcPBUFPjcQM9Rqvr/DlJkOrwI/0KcgvMub1n1g5Jt9EgRn4A==}
 
@@ -10309,6 +10315,9 @@ packages:
   use@3.1.1:
     resolution: {integrity: sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==}
     engines: {node: '>=0.10.0'}
+
+  user@0.0.0:
+    resolution: {integrity: sha512-eRNM5isOvr6aEFAGi1CqAkmLkYxW2NJ5ThhbD+6IJXYKM1mo7Gtxx4mQIveHz/5K3p/SVnlW9k17ETn+QAu8IQ==}
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
@@ -20012,6 +20021,12 @@ snapshots:
       nerv-shared: 1.4.0
       nerv-utils: 1.4.5
 
+  nest-knife4j@1.0.1(@types/express@5.0.6)(express@5.2.1):
+    dependencies:
+      '@types/express': 5.0.6
+      express: 5.2.1
+      user: 0.0.0
+
   nested-error-stacks@2.0.1: {}
 
   next-tick@1.1.0: {}
@@ -22858,6 +22873,8 @@ snapshots:
       react: 18.3.1
 
   use@3.1.1: {}
+
+  user@0.0.0: {}
 
   util-deprecate@1.0.2: {}
 

@@ -1,42 +1,31 @@
+import { ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
-import { ValidationPipe } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import helmet from "helmet";
 import { AppModule } from "./app.module";
-import helmet from 'helmet';
-import * as compression from 'compression';
-import * as cors from 'cors';
+import { setUpApiDoc } from "./utils/config/api-doc";
 
-async function bootstrap() {
-	const app = await NestFactory.create(AppModule);
+const bootstrap = async () => {
+  const app = await NestFactory.create(AppModule, {
+    cors: true,
+  });
+//   app.setGlobalPrefix("api");
 
-	// 安全中间件
-	app.use(helmet());
-	
-	// 压缩中间件
-	app.use(compression());
-	
-	// CORS 配置
-	app.use(cors());
+  // 安全中间件
+  app.use(helmet());
 
-	// 全局验证管道
-	app.useGlobalPipes(new ValidationPipe({
-		whitelist: true,
-		forbidNonWhitelisted: true,
-		transform: true,
-	}));
+  // 全局验证管道
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    }),
+  );
 
-	// Swagger 配置
-	const config = new DocumentBuilder()
-		.setTitle('Bell API')
-		.setDescription('Bell 应用程序的 API 文档')
-		.setVersion('1.0')
-		.addBearerAuth()
-		.build();
-	
-	const document = SwaggerModule.createDocument(app, config);
-	SwaggerModule.setup('api/docs', app, document);
+  // Swagger 配置
+  setUpApiDoc(app);
 
-	await app.listen(process.env.PORT ?? 3000);
-}
+  await app.listen(process.env.PORT ?? 3000);
+};
 
 bootstrap();

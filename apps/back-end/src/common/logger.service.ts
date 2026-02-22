@@ -1,40 +1,39 @@
-import { Injectable } from '@nestjs/common';
-import { createLogger, format, transports } from 'winston';
-import * as path from 'path';
+import { Injectable } from "@nestjs/common";
+import { join } from "path";
+import { createLogger, format, transports } from "winston";
 
 @Injectable()
 export class LoggerService {
   private logger = createLogger({
-    level: 'info',
+    level: "info",
     format: format.combine(
       format.timestamp({
-        format: 'YYYY-MM-DD HH:mm:ss'
+        format: "YYYY-MM-DD HH:mm:ss",
       }),
       format.errors({ stack: true }),
       format.splat(),
-      format.json()
+      format.json(),
     ),
-    defaultMeta: { service: 'bell-backend' },
+    defaultMeta: { service: "bell-backend" },
     transports: [
-      new transports.File({ 
-        filename: path.join(process.cwd(), 'logs', 'error.log'), 
-        level: 'error' 
+      new transports.File({
+        filename: join(process.cwd(), "logs", "error.log"),
+        level: "error",
       }),
-      new transports.File({ 
-        filename: path.join(process.cwd(), 'logs', 'combined.log') 
-      })
-    ]
+      new transports.File({
+        filename: join(process.cwd(), "logs", "combined.log"),
+      }),
+    ],
   });
 
   constructor() {
     // 如果不是生产环境，也输出到控制台
-    if (process.env.NODE_ENV !== 'production') {
-      this.logger.add(new transports.Console({
-        format: format.combine(
-          format.colorize(),
-          format.simple()
-        )
-      }));
+    if (process.env.NODE_ENV !== "production") {
+      this.logger.add(
+        new transports.Console({
+          format: format.combine(format.colorize(), format.simple()),
+        }),
+      );
     }
   }
 
