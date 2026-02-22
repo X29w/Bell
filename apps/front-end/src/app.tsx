@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 import { store } from "./store";
-import "@/assets/styles/global.scss";
+import "@/assets/styles/index.scss";
 
 interface AppProps extends PropsWithChildren {}
 

@@ -29,7 +29,7 @@ const List: FC = () => {
         />
       </View>
 
-      <View className="flex flex-col gap-3">
+      <View className="w-full flex flex-col gap-3 field1">
         <RenderList
           items={[...Array(10)]}
           renderItems={() => (
@@ -44,7 +44,7 @@ const List: FC = () => {
                 },
               ]}
             >
-              <View className="w-full h-24 flex flex-col justify-center bg-white">
+              <View className="w-full h-24 flex flex-col justify-center border-l-4 border-l-[#10B981] rounded-lg">
                 <View className="w-full px-4 flex justify-between items-start">
                   <View className="flex items-center gap-4">
                     <View className="w-14 h-14 bg-gray-200"></View>
@@ -57,11 +57,6 @@ const List: FC = () => {
                         Exp: Nov 02, 2023
                       </Text>
                     </View>
-                  </View>
-                  <View className="px-2 grid place-items-center">
-                    <Text className="text-[#059669] font-bold text-xs">
-                      FRESH
-                    </Text>
                   </View>
                 </View>
               </View>
