@@ -1,6 +1,7 @@
 import { Input, View } from "@tarojs/components";
 import type { FC } from "react";
 import { AtIcon } from "taro-ui";
+import SearchFilter from "./search-filter";
 
 interface SearchCommodityProps {
   className?: string;
@@ -44,14 +45,7 @@ const SearchCommodity: FC<SearchCommodityProps> = ({
           placeholder={placeholder}
         />
       </View>
-      <View className="w-12 h-full grid place-items-center bg-white rounded-2xl">
-        <AtIcon
-          prefixClass="icon"
-          value="shaixuan"
-          color={filterIcon.color}
-          size={filterIcon.size}
-        />
-      </View>
+      <SearchFilter color={filterIcon.color!} size={filterIcon.size!} />
     </View>
   );
 };

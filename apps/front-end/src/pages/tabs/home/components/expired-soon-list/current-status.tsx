@@ -10,7 +10,7 @@ const CurrentStatus: FC<CurrentStatusProps> = ({ status }) => {
   const Today = () => (
     <View className="w-fit px-2 py-1 flex items-center gap-1 bg-[#FEF2F2] rounded-2xl">
       <AtIcon prefixClass="icon" value="cuowu1" size="16" color="#DC2626" />
-      <Text className="text-[#DC2626] text-xs font-bold">TODAY</Text>
+      <Text className="text-red-1 text-xs font-bold">TODAY</Text>
     </View>
   );
 
