@@ -9,17 +9,6 @@ const List: FC = () => {
     <View className="px-4">
       <SearchCommodity className="my-8" />
 
-      <View className="mb-4 flex gap-2 items-center">
-        <RenderList
-          items={[...Array(3)]}
-          renderItems={() => (
-            <View className=" h-9 px-5 grid place-items-center text-sm font-medium bg-white rounded-2xl">
-              All Items
-            </View>
-          )}
-        />
-      </View>
-
       <View className="w-full flex flex-col gap-3 field1">
         <RenderList
           items={[...Array(10)]}
