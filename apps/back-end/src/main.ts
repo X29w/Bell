@@ -8,7 +8,7 @@ const bootstrap = async () => {
   const app = await NestFactory.create(AppModule, {
     cors: true,
   });
-//   app.setGlobalPrefix("api");
+  app.setGlobalPrefix("api");
 
   // 安全中间件
   app.use(helmet());
