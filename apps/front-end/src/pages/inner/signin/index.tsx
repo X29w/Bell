@@ -1,4 +1,5 @@
 import { Text, View } from "@tarojs/components";
+import Taro from "@tarojs/taro";
 import type { FC } from "react";
 import { AtIcon } from "taro-ui";
 
@@ -27,7 +28,14 @@ const Signin: FC = () => {
           <Text className="text-white text-base font-medium">微信一键登录</Text>
         </View>
 
-        <View className="mt-8 flex justify-center items-center">
+        <View
+          className="mt-8 flex justify-center items-center"
+          onClick={() => {
+            Taro.switchTab({
+              url: "/pages/tabs/home/index",
+            });
+          }}
+        >
           <Text className="text-sm text-gray-2 font-medium">skip</Text>
         </View>
       </View>
