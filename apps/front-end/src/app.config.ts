@@ -8,6 +8,7 @@ export default defineAppConfig({
     "pages/inner/space-created/index",
     "pages/inner/scanner/index",
     "pages/inner/commodity/index",
+    "pages/inner/signin/index",
   ],
   tabBar: {
     // custom: true,
