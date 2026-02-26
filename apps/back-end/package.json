@@ -34,7 +34,6 @@
     "class-validator": "^0.14.3",
     "compression": "^1.8.1",
     "helmet": "^8.1.0",
-    "mysql2": "^3.17.5",
     "nest-knife4j": "^1.0.1",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
