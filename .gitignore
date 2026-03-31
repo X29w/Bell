@@ -69,3 +69,4 @@ dist/
 .lingma
 generated
 migrations
+.qwen
