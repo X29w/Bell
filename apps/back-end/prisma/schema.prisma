@@ -11,11 +11,113 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+// ==================== 用户 ====================
+
+/// 用户表
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
   password  String
   name      String?
+  avatarUrl String?
+  openId    String?  @unique /// 微信 OpenID
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  // 关联
+  ownedSpaces  Space[]       @relation("SpaceOwner")
+  memberships  SpaceMember[]
+  commodities  Commodity[]
+  reminders    Reminder[]
+}
+
+// ==================== 空间 ====================
+
+/// 空间表（家庭/房间等）
+model Space {
+  id         String   @id @default(uuid())
+  name       String
+  iconUrl    String?
+  inviteCode String   @unique /// 邀请码，如 HEM-829-X
+  ownerId    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // 关联
+  owner      User          @relation("SpaceOwner", fields: [ownerId], references: [id])
+  members    SpaceMember[]
+  categories Category[]
+  commodities Commodity[]
+}
+
+/// 空间成员表（多对多）
+model SpaceMember {
+  id        String   @id @default(uuid())
+  userId    String
+  spaceId   String
+  role      String   @default("member") /// owner | admin | member
+  joinedAt  DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  space Space @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, spaceId])
+}
+
+// ==================== 分类 ====================
+
+/// 物品分类表
+model Category {
+  id        String   @id @default(uuid())
+  name      String   /// 如 Medical, Cook, Dairy 等
+  iconUrl   String?
+  spaceId   String
+  createdAt DateTime @default(now())
+
+  space       Space       @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  commodities Commodity[]
+
+  @@unique([name, spaceId])
+}
+
+// ==================== 物品 ====================
+
+/// 物品表
+model Commodity {
+  id          String    @id @default(uuid())
+  name        String
+  imageUrl    String?
+  expiryDate  DateTime  /// 过期日期
+  location    String?   /// 存放位置，如 Refrigerator, Countertop
+  quantity    Int       @default(1)
+  isUsed      Boolean   @default(false) /// 是否已标记使用
+  usedAt      DateTime?
+  spaceId     String
+  categoryId  String?
+  createdById String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  space     Space      @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  category  Category?  @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  createdBy User       @relation(fields: [createdById], references: [id])
+  reminders Reminder[]
+}
+
+// ==================== 提醒 ====================
+
+/// 过期提醒表
+model Reminder {
+  id          String   @id @default(uuid())
+  daysBefore  Int      @default(2) /// 提前几天提醒
+  isEnabled   Boolean  @default(true)
+  commodityId String
+  userId      String
+  createdAt   DateTime @default(now())
+
+  commodity Commodity @relation(fields: [commodityId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([commodityId, userId])
 }
