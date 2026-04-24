@@ -1,10 +1,7 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import type { User, LoginParams } from '@/types/user';
-import * as userService from '@/services/user';
-import { removeToken } from '@/utils/config/request';
+import { createSlice } from '@reduxjs/toolkit';
 
 interface UserState {
-  current: User | null;
+  current: User.Info | null;
   token: string | null;
   loading: boolean;
 }
@@ -15,39 +12,24 @@ const initialState: UserState = {
   loading: false,
 };
 
-/** 登录 */
-export const signinAsync = createAsyncThunk('user/signin', async (params: LoginParams) => {
-  const result = await userService.signin(params);
-  return result.access_token;
-});
-
-/** 获取当前用户信息 */
-export const fetchProfileAsync = createAsyncThunk('user/fetchProfile', async () => {
-  return userService.getProfile();
-});
-
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    logout(state) {
+    setUser(state, action) {
+      state.current = action.payload;
+    },
+    setToken(state, action) {
+      state.token = action.payload;
+    },
+    setUserLoading(state, action) {
+      state.loading = action.payload;
+    },
+    clearUser(state) {
       state.current = null;
       state.token = null;
-      removeToken();
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(signinAsync.pending, (state) => { state.loading = true; })
-      .addCase(signinAsync.fulfilled, (state, action) => {
-        state.token = action.payload;
-        state.loading = false;
-      })
-      .addCase(signinAsync.rejected, (state) => { state.loading = false; })
-      .addCase(fetchProfileAsync.fulfilled, (state, action) => {
-        state.current = action.payload;
-      });
   },
 });
 
-export const { logout } = userSlice.actions;
+export const { setUser, setToken, setUserLoading, clearUser } = userSlice.actions;

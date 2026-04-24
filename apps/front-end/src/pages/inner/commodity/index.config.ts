@@ -1,3 +1,3 @@
 export default definePageConfig({
-	navigationBarTitleText: "Commodity",
+  navigationBarTitleText: "Item Detail",
 });

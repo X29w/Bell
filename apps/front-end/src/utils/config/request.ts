@@ -1,5 +1,4 @@
 import Taro from '@tarojs/taro';
-import type { ApiResponse } from '@/types/common';
 
 const BASE_URL = process.env.TARO_APP_API_BASE_URL || 'http://localhost:3000/api';
 const TOKEN_KEY = 'bell_token';
@@ -37,7 +36,7 @@ async function request<T>(
   }
 
   try {
-    const res = await Taro.request<ApiResponse<T>>({
+    const res = await Taro.request<Common.ApiResponse<T>>({
       url: `${BASE_URL}${url}`,
       method: options.method,
       data: options.data,

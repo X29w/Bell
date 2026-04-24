@@ -1,9 +1,7 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import type { Space } from '@/types/space';
-import * as spaceService from '@/services/space';
+import { createSlice } from '@reduxjs/toolkit';
 
 interface SpaceState {
-  list: Space[];
+  list: Space.Info[];
   currentId: string | null;
   loading: boolean;
 }
@@ -14,32 +12,23 @@ const initialState: SpaceState = {
   loading: false,
 };
 
-/** 获取我的空间列表 */
-export const fetchSpacesAsync = createAsyncThunk('space/fetchAll', async () => {
-  return spaceService.getMySpaces();
-});
-
 export const spaceSlice = createSlice({
   name: 'space',
   initialState,
   reducers: {
+    setSpaces(state, action) {
+      state.list = action.payload;
+      if (!state.currentId && action.payload.length > 0) {
+        state.currentId = action.payload[0].id;
+      }
+    },
     setCurrentSpace(state, action) {
       state.currentId = action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchSpacesAsync.pending, (state) => { state.loading = true; })
-      .addCase(fetchSpacesAsync.fulfilled, (state, action) => {
-        state.list = action.payload;
-        state.loading = false;
-        // 如果没有选中空间，默认选第一个
-        if (!state.currentId && action.payload.length > 0) {
-          state.currentId = action.payload[0].id;
-        }
-      })
-      .addCase(fetchSpacesAsync.rejected, (state) => { state.loading = false; });
+    setSpaceLoading(state, action) {
+      state.loading = action.payload;
+    },
   },
 });
 
-export const { setCurrentSpace } = spaceSlice.actions;
+export const { setSpaces, setCurrentSpace, setSpaceLoading } = spaceSlice.actions;
