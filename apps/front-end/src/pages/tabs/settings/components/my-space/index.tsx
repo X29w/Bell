@@ -21,11 +21,11 @@ const MySpace: FC = () => {
         <View className="w-full h-20 mt-3 px-4 flex flex-col justify-center border border-solid border-[#E2E8F0] rounded-lg bg-white">
           <View className="flex justify-between items-center">
             <View className="w-full flex items-center gap-3">
-              <View className="w-10 h-10 bg-blue-1/10 rounded-lg"></View>
+              <View className="w-10 h-10 bg-blue-1/10 rounded-lg" />
               <View className="flex flex-col gap-1">
                 <Text className="text-black-1 text-base font-medium">{currentSpace.name}</Text>
                 <Text className="text-[#64748B] text-xs">
-                  {currentSpace._count?.commodities || 0} items • {currentSpace._count?.members || 0} members
+                  {currentSpace._count?.commodities ?? 0} items • Primary Space
                 </Text>
               </View>
             </View>
@@ -34,7 +34,7 @@ const MySpace: FC = () => {
         </View>
       ) : (
         <View className="w-full h-20 mt-3 px-4 flex flex-col justify-center items-center border border-dashed border-[#E2E8F0] rounded-lg">
-          <Text className="text-gray-2 text-sm">暂无空间，去创建一个吧</Text>
+          <Text className="text-gray-2 text-sm">暂无空间</Text>
         </View>
       )}
     </View>

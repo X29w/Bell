@@ -1,88 +1,68 @@
-import { Input, Text, View } from "@tarojs/components";
-import Taro from "@tarojs/taro";
-import { useState, type FC } from "react";
+import { Text, View } from "@tarojs/components";
+import Taro, { useRouter } from "@tarojs/taro";
+import type { FC } from "react";
 import { AtIcon } from "taro-ui";
-import { useAppDispatch } from "@/store";
-import { signinAsync, fetchProfileAsync } from "@/store/slice/user.slice";
-import { fetchSpacesAsync } from "@/store/slice/space.slice";
 
-const Signin: FC = () => {
-  const dispatch = useAppDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+const SpaceCreated: FC = () => {
+  const router = useRouter();
+  const code = router.params.code || "";
+  const codeChars = code.replace(/-/g, "");
 
-  const handleLogin = async () => {
-    if (!email || !password) {
-      Taro.showToast({ title: "请输入邮箱和密码", icon: "none" });
-      return;
-    }
+  /** 复制邀请码 */
+  const handleCopy = () => {
+    Taro.setClipboardData({ data: code });
+  };
 
-    setLoading(true);
-    try {
-      await dispatch(signinAsync({ email, password })).unwrap();
-      await dispatch(fetchProfileAsync());
-      await dispatch(fetchSpacesAsync());
-      Taro.showToast({ title: "登录成功", icon: "success" });
-      setTimeout(() => Taro.switchTab({ url: "/pages/tabs/home/index" }), 500);
-    } catch {
-      // 错误已在 request 层处理
-    } finally {
-      setLoading(false);
-    }
+  /** 跳转到空间列表 */
+  const handleGoToSpaces = () => {
+    Taro.navigateBack();
   };
 
   return (
-    <View className="w-full h-full mt-12 px-6">
-      <View>
-        <View className="w-20 h-20 mx-auto grid place-items-center bg-blue-1/10 rounded-2xl">
-          <AtIcon prefixClass="icon" value="kucun" size={50} color="#137FEC" />
+    <View>
+      <View className="w-20 h-20 mx-auto mt-8 grid place-items-center bg-blue-1/10 rounded-full">
+        <View className="w-12 h-12 grid place-items-center bg-blue-1 rounded-full">
+          <AtIcon value="check" size="20" color="#ffffff" />
         </View>
+      </View>
 
-        <View className="mt-8 mb-16 flex flex-col items-center gap-2">
-          <Text className="text-black-1 text-4xl font-medium">家物清单</Text>
-          <Text className="text-black-2 text-lg font-medium">让居家生活更有序</Text>
-        </View>
+      <View className="w-full mt-6 mb-2 flex justify-center">
+        <Text className="text-2xl font-bold text-black-1">Space Created!</Text>
+      </View>
+      <View className="w-full px-6 text-center">
+        <Text className="w-full text-base text-gray-2">
+          Invite others to join your space using this code.
+        </Text>
+      </View>
 
-        <View className="flex flex-col gap-4 mb-8">
-          <View className="h-14 px-4 flex items-center bg-white rounded-2xl border border-solid border-[#E2E8F0]">
-            <Input
-              className="flex-1"
-              type="text"
-              placeholder="邮箱"
-              value={email}
-              onInput={(e) => setEmail(e.detail.value)}
-            />
+      <View className="mt-16 mb-6 px-3 flex justify-around">
+        {codeChars.split("").map((char, i) => (
+          <View
+            key={i}
+            className="w-10 h-14 grid place-items-center bg-blue-1/5 rounded-xl border border-solid border-blue-1/10"
+          >
+            <Text className="text-3xl font-bold text-blue-1">{char}</Text>
           </View>
-          <View className="h-14 px-4 flex items-center bg-white rounded-2xl border border-solid border-[#E2E8F0]">
-            <Input
-              className="flex-1"
-              type="safe-password"
-              placeholder="密码"
-              value={password}
-              onInput={(e) => setPassword(e.detail.value)}
-            />
+        ))}
+      </View>
+
+      <View className="w-full flex justify-center">
+        <View className="flex items-center gap-3">
+          <View
+            className="w-40 h-14 bg-blue-1 rounded-xl flex justify-center items-center gap-2"
+            onClick={handleCopy}
+          >
+            <AtIcon prefixClass="icon" value="fuzhi" size="20" color="#ffffff" />
+            <Text className="text-base font-medium text-white">Copy Code</Text>
           </View>
         </View>
+      </View>
 
-        <View
-          className={`w-full h-14 flex items-center gap-2 justify-center rounded-2xl ${loading ? "bg-blue-1/50" : "bg-blue-1"}`}
-          onClick={loading ? undefined : handleLogin}
-        >
-          <Text className="text-white text-base font-medium">
-            {loading ? "登录中..." : "登录"}
-          </Text>
-        </View>
-
-        <View
-          className="mt-8 flex justify-center items-center"
-          onClick={() => Taro.switchTab({ url: "/pages/tabs/home/index" })}
-        >
-          <Text className="text-sm text-gray-2 font-medium">skip</Text>
-        </View>
+      <View className="w-full px-6 mt-8 flex justify-center" onClick={handleGoToSpaces}>
+        <Text className="text-sm text-blue-1 font-semibold">Go to My Space</Text>
       </View>
     </View>
   );
 };
 
-export default Signin;
+export default SpaceCreated;

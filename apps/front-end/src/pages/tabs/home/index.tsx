@@ -8,22 +8,33 @@ import SearchCommodity from "@/components/feature/search-commodity";
 import Header from "./components/header";
 import ExpiredSoonList from "./components/expired-soon-list";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { fetchSpacesAsync } from "@/store/slice/space.slice";
-import { fetchCommoditiesAsync, fetchStatisticsAsync } from "@/store/slice/commodity.slice";
+import { setSpaces } from "@/store/slice/space.slice";
+import { setCommodities, setStatistics } from "@/store/slice/commodity.slice";
+import { getMySpaces } from "@/services/space";
+import { getCommodities, getCommodityStatistics } from "@/services/commodity";
 
 const Home: FC = () => {
   const dispatch = useAppDispatch();
   const { currentId } = useAppSelector((s) => s.space);
 
+  /** 页面每次显示时刷新数据 */
+  const loadData = async () => {
+    const spaces = await getMySpaces();
+    dispatch(setSpaces(spaces));
+
+    const spaceId = spaces[0]?.id;
+    if (!spaceId) return;
+
+    const [stats, items] = await Promise.all([
+      getCommodityStatistics(spaceId),
+      getCommodities({ spaceId }),
+    ]);
+    dispatch(setStatistics(stats));
+    dispatch(setCommodities(items));
+  };
+
   useDidShow(() => {
-    dispatch(fetchSpacesAsync()).then((action) => {
-      const spaces = action.payload;
-      if (Array.isArray(spaces) && spaces.length > 0) {
-        const spaceId = spaces[0].id;
-        dispatch(fetchStatisticsAsync(spaceId));
-        dispatch(fetchCommoditiesAsync({ spaceId }));
-      }
-    });
+    loadData();
   });
 
   return (

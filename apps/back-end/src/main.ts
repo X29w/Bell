@@ -1,6 +1,8 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import * as express from 'express';
 import helmet from 'helmet';
+import * as path from 'path';
 import { AppModule } from './app.module';
 import { setUpApiDoc } from './config/api-doc';
 import { createLogger } from './config/logger';
@@ -18,6 +20,9 @@ const bootstrap = async () => {
 
   // 安全中间件
   app.use(helmet());
+
+  // 静态文件服务：uploads 目录
+  app.use('/uploads', express.static(path.resolve(process.cwd(), 'uploads')));
 
   // 全局异常过滤器
   app.useGlobalFilters(new HttpExceptionFilter());

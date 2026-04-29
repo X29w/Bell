@@ -70,3 +70,14 @@ dist/
 generated
 migrations
 .qwen
+
+# SQLite
+*.db
+*.db-journal
+
+# Logs directory
+logs/
+.kiro
+
+# Uploads
+uploads/

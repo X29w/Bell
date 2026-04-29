@@ -3,7 +3,8 @@ import Taro from "@tarojs/taro";
 import type { FC } from "react";
 import { AtIcon } from "taro-ui";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { logout } from "@/store/slice/user.slice";
+import { clearUser } from "@/store/slice/user.slice";
+import { removeToken } from "@/utils/config/request";
 
 const Signout: FC = () => {
   const dispatch = useAppDispatch();
@@ -12,7 +13,8 @@ const Signout: FC = () => {
   if (!user) return null;
 
   const handleLogout = () => {
-    dispatch(logout());
+    removeToken();
+    dispatch(clearUser());
     Taro.showToast({ title: "已退出登录", icon: "success" });
   };
 

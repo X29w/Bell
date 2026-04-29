@@ -1,38 +1,34 @@
 import Link from "@/components/config/link";
 import RenderList from "@/components/config/render-list";
-import { Input, Text, View } from "@tarojs/components";
+import { Text, View } from "@tarojs/components";
 import Taro, { useDidShow } from "@tarojs/taro";
 import { useState, type FC } from "react";
 import { AtIcon } from "taro-ui";
-import { useAppDispatch, useAppSelector } from "@/store";
-import { fetchSpacesAsync } from "@/store/slice/space.slice";
-import { createSpace } from "@/services/space";
-import type { Space } from "@/types/space";
+import { getMySpaces, createSpace } from "@/services/space";
 
 const Spaces: FC = () => {
-  const dispatch = useAppDispatch();
-  const { list } = useAppSelector((s) => s.space);
-  const [showCreate, setShowCreate] = useState(false);
-  const [newName, setNewName] = useState("");
+  const [spaces, setSpaces] = useState<Space.Info[]>([]);
+
+  const loadSpaces = async () => {
+    const list = await getMySpaces();
+    setSpaces(list);
+  };
 
   useDidShow(() => {
-    dispatch(fetchSpacesAsync());
+    loadSpaces();
   });
 
+  /** 创建新空间 */
   const handleCreate = async () => {
-    if (!newName.trim()) {
-      Taro.showToast({ title: "请输入空间名称", icon: "none" });
-      return;
-    }
-    try {
-      const space = await createSpace({ name: newName.trim() });
-      setNewName("");
-      setShowCreate(false);
-      dispatch(fetchSpacesAsync());
-      Taro.navigateTo({ url: `/pages/inner/space-created/index?code=${space.inviteCode}&name=${space.name}` });
-    } catch {
-      // 错误已在 request 层处理
-    }
+    const res = await Taro.showModal({
+      title: "创建空间",
+      editable: true,
+      placeholderText: "输入空间名称",
+    });
+    if (!res.confirm || !res.content) return;
+
+    const space = await createSpace({ name: res.content });
+    Taro.navigateTo({ url: `/pages/inner/space-created/index?id=${space.id}&code=${space.inviteCode}` });
   };
 
   return (
@@ -45,24 +41,24 @@ const Spaces: FC = () => {
 
       <View className="px-4">
         <View className="flex flex-col gap-4">
-          {list.length === 0 ? (
-            <View className="py-8 flex justify-center">
-              <Text className="text-gray-2 text-sm">暂无空间，创建一个吧</Text>
+          {spaces.length === 0 ? (
+            <View className="py-16 flex justify-center">
+              <Text className="text-gray-2 text-sm">暂无空间，点击下方按钮创建</Text>
             </View>
           ) : (
             <RenderList
-              items={list}
-              extraKey={(item: Space) => item.id}
-              renderItems={(item: Space) => (
+              items={spaces}
+              extraKey={(item: Space.Info) => item.id}
+              renderItems={(item: Space.Info) => (
                 <Link to={`/pages/inner/space-detail/index?id=${item.id}`}>
                   <View className="h-24 p-4 flex justify-between items-center bg-white rounded-lg">
                     <View className="flex justify-between items-center gap-4">
-                      <View className="w-14 h-14 bg-blue-1/10 rounded-lg"></View>
+                      <View className="w-14 h-14 bg-blue-1/10 rounded-lg" />
                       <View className="flex flex-col gap-1">
                         <Text className="text-lg font-bold text-black-1">{item.name}</Text>
                         <View className="flex items-center gap-2">
-                          <Text className="text-sm text-gray-2">{item._count?.commodities || 0} items</Text>
-                          <Text className="text-sm text-gray-2">{item._count?.members || 0} members</Text>
+                          <Text className="text-sm text-gray-2">{item._count?.commodities ?? 0} items</Text>
+                          <Text className="text-sm text-gray-2">{item._count?.members ?? 0} members</Text>
                         </View>
                       </View>
                     </View>
@@ -86,24 +82,7 @@ const Spaces: FC = () => {
           </View>
         </View>
 
-        {showCreate && (
-          <View className="mb-4 flex items-center gap-2">
-            <Input
-              className="flex-1 h-14 px-4 bg-white rounded-xl border border-solid border-[#E2E8F0]"
-              placeholder="空间名称"
-              value={newName}
-              onInput={(e) => setNewName(e.detail.value)}
-            />
-            <View className="h-14 px-4 grid place-items-center bg-blue-1 rounded-xl" onClick={handleCreate}>
-              <Text className="text-white text-sm font-bold">确定</Text>
-            </View>
-          </View>
-        )}
-
-        <View
-          className="w-full h-14 grid place-items-center rounded-xl bg-blue-1"
-          onClick={() => setShowCreate(!showCreate)}
-        >
+        <View className="w-full h-14 grid place-items-center rounded-xl bg-blue-1" onClick={handleCreate}>
           <View className="flex items-center gap-2">
             <AtIcon prefixClass="icon" value="jia" size="18" color="#ffffff" />
             <Text className="text-base text-white font-bold">Create New Space</Text>

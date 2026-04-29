@@ -6,34 +6,39 @@ import { useDidShow } from "@tarojs/taro";
 import type { FC } from "react";
 import { AtSwipeAction } from "taro-ui";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { fetchCommoditiesAsync } from "@/store/slice/commodity.slice";
-import { deleteCommodity, updateCommodity } from "@/services/commodity";
+import { setCommodities } from "@/store/slice/commodity.slice";
+import { getCommodities, deleteCommodity, updateCommodity } from "@/services/commodity";
 import CurrentStatus from "../home/components/expired-soon-list/current-status";
-import type { Commodity } from "@/types/commodity";
 
 const List: FC = () => {
   const dispatch = useAppDispatch();
   const { list } = useAppSelector((s) => s.commodity);
   const { currentId } = useAppSelector((s) => s.space);
 
+  /** 加载物品列表 */
+  const loadList = async () => {
+    if (!currentId) return;
+    const items = await getCommodities({ spaceId: currentId });
+    dispatch(setCommodities(items));
+  };
+
   useDidShow(() => {
-    if (currentId) {
-      dispatch(fetchCommoditiesAsync({ spaceId: currentId }));
-    }
+    loadList();
   });
 
   /** 标记已使用 */
   const handleMarkUsed = async (id: string) => {
     await updateCommodity(id, { isUsed: true });
-    if (currentId) dispatch(fetchCommoditiesAsync({ spaceId: currentId }));
+    loadList();
   };
 
   /** 删除物品 */
   const handleDelete = async (id: string) => {
     await deleteCommodity(id);
-    if (currentId) dispatch(fetchCommoditiesAsync({ spaceId: currentId }));
+    loadList();
   };
 
+  /** 格式化日期 */
   const formatDate = (dateStr: string) => {
     const d = new Date(dateStr);
     return d.toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" });
@@ -51,8 +56,8 @@ const List: FC = () => {
         ) : (
           <RenderList
             items={list}
-            extraKey={(item: Commodity) => item.id}
-            renderItems={(item: Commodity) => (
+            extraKey={(item: Commodity.Info) => item.id}
+            renderItems={(item: Commodity.Info) => (
               <AtSwipeAction
                 autoClose
                 options={[
@@ -68,7 +73,7 @@ const List: FC = () => {
                   <View className="w-full h-24 flex flex-col justify-center border-l-4 border-l-[#10B981] rounded-lg bg-white">
                     <View className="w-full px-4 flex justify-between items-start">
                       <View className="flex items-center gap-4">
-                        <View className="w-14 h-14 bg-gray-200 rounded-lg"></View>
+                        <View className="w-14 h-14 bg-gray-200 rounded-lg" />
                         <View className="flex flex-col">
                           <Text className="text-base font-bold text-black-1">{item.name}</Text>
                           <Text className="text-xs text-gray-2">{item.location || ""}</Text>

@@ -3,9 +3,8 @@ import Taro from "@tarojs/taro";
 import { useState, useEffect, type FC } from "react";
 import { AtIcon, AtList, AtListItem } from "taro-ui";
 import { useAppSelector } from "@/store";
-import { createCommodity } from "@/services/commodity";
-import { getCategories } from "@/services/commodity";
-import type { Category } from "@/types/commodity";
+import { createCommodity, getCategories } from "@/services/commodity";
+import { uploadImage } from "@/services/upload";
 
 const Scanner: FC = () => {
   const { currentId } = useAppSelector((s) => s.space);
@@ -13,7 +12,7 @@ const Scanner: FC = () => {
   const [name, setName] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [categoryIndex, setCategoryIndex] = useState(-1);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<Commodity.Category[]>([]);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -22,6 +21,7 @@ const Scanner: FC = () => {
     }
   }, [currentId]);
 
+  /** 选择图片 */
   const handleChooseImage = async () => {
     try {
       const res = await Taro.chooseImage({
@@ -37,29 +37,27 @@ const Scanner: FC = () => {
     }
   };
 
+  /** 保存物品 */
   const handleSave = async () => {
-    if (!name) {
-      Taro.showToast({ title: "请输入物品名称", icon: "none" });
-      return;
-    }
-    if (!expiryDate) {
-      Taro.showToast({ title: "请选择过期日期", icon: "none" });
-      return;
-    }
-    if (!currentId) {
-      Taro.showToast({ title: "请先创建或选择一个空间", icon: "none" });
-      return;
-    }
+    if (!name) return Taro.showToast({ title: "请输入物品名称", icon: "none" });
+    if (!expiryDate) return Taro.showToast({ title: "请选择过期日期", icon: "none" });
+    if (!currentId) return Taro.showToast({ title: "请先创建或选择一个空间", icon: "none" });
 
     setSaving(true);
     try {
+      let imageUrl: string | undefined;
+      if (selectedImage) {
+        imageUrl = await uploadImage(selectedImage);
+      }
+
       await createCommodity({
         name,
         expiryDate: new Date(expiryDate).toISOString(),
         spaceId: currentId,
         categoryId: categoryIndex >= 0 ? categories[categoryIndex]?.id : undefined,
-        imageUrl: selectedImage || undefined,
+        imageUrl,
       });
+
       Taro.showToast({ title: "添加成功", icon: "success" });
       setTimeout(() => Taro.navigateBack(), 500);
     } catch {
@@ -73,7 +71,7 @@ const Scanner: FC = () => {
     <View>
       <View className="h-16 flex flex-col justify-center">
         <View className="w-full flex justify-between items-center">
-          <View className="w-2 h-2 bg-gray-200"></View>
+          <View className="w-2 h-2 bg-gray-200" />
           <Text className="text-lg text-black-1 font-bold">Scan and Add</Text>
           <View />
         </View>
